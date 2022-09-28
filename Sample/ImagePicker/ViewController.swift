@@ -76,7 +76,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AssetCell", for: indexPath) as? AssetCell else {
                 fatalError("failed to dequeueReusableCellWithIdentifier(\"Cell\")")
         }
-        let asset = imagesAndVideos.object(at: indexPath.row)
+        let asset = imagesAndVideos.object(at: indexPath.section)
 
         let manager = PHImageManager.default()
         let option = PHImageRequestOptions()
@@ -114,7 +114,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
                     }
 
                     let exportSession = AVAssetExportSession(asset: convertedAsset, presetName: AVAssetExportPresetPassthrough)!
-                    exportSession.outputFileType = AVFileType.mp4
+                    exportSession.outputFileType = .mp4
                     exportSession.outputURL = outputUrl
 
                     exportSession.exportAsynchronously {
